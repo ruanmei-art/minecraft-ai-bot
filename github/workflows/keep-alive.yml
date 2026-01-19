@@ -1,0 +1,25 @@
+name: Keep Bot Alive
+on:
+  schedule:
+    - cron: '*/5 * * * *'  # Mỗi 5 phút
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Bot Server
+        run: |
+          echo "🕒 $(date)"
+          echo "Pinging bot server..."
+          
+          # URL Codespaces của bạn
+          BOT_URL="${{ secrets.CODESPACES_URL || 'http://localhost:8080' }}"
+          
+          # Thử ping
+          if curl -s -f "$BOT_URL/health" > /dev/null; then
+            echo "✅ Bot is alive and responding"
+          else
+            echo "⚠️ Bot may be sleeping"
+            # Có thể thêm logic restart ở đây
+          fi
