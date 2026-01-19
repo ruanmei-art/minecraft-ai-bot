@@ -1,0 +1,29 @@
+{
+    "name": "Minecraft AI Bot",
+    "image": "mcr.microsoft.com/devcontainers/python:1-3.11",
+    "features": {
+        "ghcr.io/devcontainers/features/python:1": {}
+    },
+    "forwardPorts": [8080],
+    "postCreateCommand": "pip install -r requirements.txt",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-python.python",
+                "ms-python.vscode-pylance",
+                "github.copilot"
+            ],
+            "settings": {
+                "python.defaultInterpreterPath": "/usr/local/bin/python",
+                "python.linting.enabled": true,
+                "python.linting.pylintEnabled": true
+            }
+        }
+    },
+    "portsAttributes": {
+        "8080": {
+            "label": "Bot Dashboard",
+            "onAutoForward": "openPreview"
+        }
+    }
+}
